@@ -1,0 +1,45 @@
+---
+
+###
+# VAULT
+###
+
+# Binary
+vault_version: 0.11.5
+vault_bin_url: https://releases.hashicorp.com/vault/{{ vault_version }}/vault_{{ vault_version }}_linux_amd64.zip
+
+# User
+vault_group: vault
+vault_user: vault
+
+# Directories
+vault_home_dir: /usr/local/bin
+vault_config_dir: /etc/vault.d
+vault_data_dir: /data/vault/data
+vault_log_dir: /var/log/vault
+vault_run_dir: /var/run/vault
+
+# Log rotation
+vault_logrotate_rotate: 7
+vault_log_level: info
+
+# Files
+vault_config_file: "{{ vault_config_dir }}/vault_main.hcl"
+
+# Listener
+vault_listener_host: "{{ hostvars[inventory_hostname].ip }}"
+vault_listener_port: 8200
+vault_listener_address: "{{ vault_listener_host }}:{{ vault_listener_port }}"
+
+# Storage
+vault_storage_address: "{{ hostvars[inventory_hostname].ip }}:2181"
+vault_storage_path: "vault/"
+
+# UI
+vault_ui: true
+
+# Cluster
+vault_cluster_name: "{{ inventory_hostname }}"
+vault_api_addr: "http://{{ hostvars[inventory_hostname].ip }}:{{ vault_listener_port }}"
+vault_cluster_addr: "http://{{ hostvars[inventory_hostname].ip }}:{{ (vault_listener_port | int) + 1}}"
+vault_disable_clustering: false

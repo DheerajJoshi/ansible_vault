@@ -1,0 +1,22 @@
+cluster_name = "{{ vault_cluster_name }}"
+api_addr = "{{ vault_api_addr }}"
+cluster_addr = "{{ vault_cluster_addr }}"
+{% if vault_disable_clustering %}
+disable_clustering = true
+{% endif %}
+
+log_level = "{{ vault_log_level }}"
+
+storage "zookeeper" {
+  address = "{{ vault_storage_address }}"
+  path    = "{{ vault_storage_path }}"
+}
+
+listener "tcp" {
+ address     = "{{ vault_listener_address }}"
+ tls_disable = 1
+}
+
+{% if vault_ui %}
+ui = true
+{% endif -%}

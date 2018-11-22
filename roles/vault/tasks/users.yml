@@ -1,0 +1,13 @@
+---
+
+- name: VAULT GROUP | Create group
+  group:
+    name: "{{ vault_group }}"
+    state: present
+
+- name: VAULT USER | Create user
+  user:
+    name: "{{ vault_user }}"
+    comment: "Vault user"
+    group: "{{ vault_group }}"
+    system: true
