@@ -10,4 +10,5 @@
     name: "{{ vault_user }}"
     comment: "Vault user"
     group: "{{ vault_group }}"
+    create_home: false
     system: true

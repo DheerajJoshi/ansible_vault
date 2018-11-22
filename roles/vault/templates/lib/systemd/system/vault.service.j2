@@ -13,13 +13,8 @@ User={{ vault_user }}
 Group={{ vault_group }}
 ProtectSystem=full
 ProtectHome=read-only
-PrivateTmp=yes
-PrivateDevices=yes
-SecureBits=keep-caps
-Capabilities=CAP_IPC_LOCK+ep
-CapabilityBoundingSet=CAP_SYSLOG CAP_IPC_LOCK
 NoNewPrivileges=yes
-ExecStart={{ vault_home_dir }}/vault server -config={{ vault_config_file }}
+ExecStart={{ vault_home_dir }}/vault server -config={{ vault_config_file }} -log-level={{ vault_log_level}} > {{ vault_log_dir }}/vault.log 2>&1
 ExecReload=/bin/kill --signal HUP $MAINPID
 KillMode=process
 KillSignal=SIGINT
